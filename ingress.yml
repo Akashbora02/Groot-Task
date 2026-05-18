@@ -12,7 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: |
       [{"HTTPS":443}]
 
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:123456789:certificate/abc123
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:813592692089:certificate/129efc87-e13c-43cd-b8f0-5dadd64065e9
 
 spec:
   rules:
