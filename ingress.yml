@@ -16,7 +16,7 @@ metadata:
 
 spec:
   rules:
-  - host: akash.react.grootsdrive.in
+  - host: a657c657b0ad74f6f86aead309a623ab-2128795814.us-east-1.elb.amazonaws.com
     http:
       paths:
       - path: /
@@ -27,10 +27,8 @@ spec:
             port:
               number: 80
 
-  - host: akash.php.grootsdrive.in
-    http:
-      paths:
-      - path: /
+    paths:
+      - path: /php
         pathType: Prefix
         backend:
           service:
