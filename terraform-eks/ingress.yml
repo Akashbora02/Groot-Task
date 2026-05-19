@@ -7,11 +7,9 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-#    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:813592692089:certificate/054b52e8-6341-4e58-bd9e-9d816f9b949f
-#    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
 spec:
   rules:
-  - host: akash.react.grootsdrive.in
+  - host: 
     http:
       paths:
       - path: /
@@ -21,13 +19,15 @@ spec:
             name: react-service
             port:
               number: 80
-  - host: akash.php.grootsdrive.in
+  - host: 
     http:
       paths:
-      - path: /
+      - path: /php
         pathType: Prefix
         backend:
           service:
             name: php-service
             port:
               number: 80
+#    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:813592692089:certificate/054b52e8-6341-4e58-bd9e-9d816f9b949f
+#    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
