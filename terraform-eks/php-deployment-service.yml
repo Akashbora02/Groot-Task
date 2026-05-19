@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: php
-        image: php:apache
+        image: akashbora02/grocery-frontend:latest
         ports:
         - containerPort: 80
 
