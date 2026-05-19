@@ -11,8 +11,7 @@ metadata:
 #    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
 spec:
   rules:
-  - host:
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -21,8 +20,7 @@ spec:
             name: react-service
             port:
               number: 80
-  - host:
-    http:
+  - http:
       paths:
       - path: /php
         pathType: Prefix
