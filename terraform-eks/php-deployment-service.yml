@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: php
-        image: httpd
+        image: httpd:latest
         ports:
         - containerPort: 80
 
