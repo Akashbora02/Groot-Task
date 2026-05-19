@@ -1,0 +1,140 @@
+sudo apt update
+
+sudo apt install docker.io -y
+
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker ubuntu && newgrp docker
+
+docker --version
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
+-o "awscliv2.zip"
+
+sudo apt install unzip -y
+
+unzip awscliv2.zip
+
+sudo ./aws/install
+
+aws configure
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s \
+https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+chmod +x kubectl
+
+sudo mv kubectl /usr/local/bin/
+
+curl --silent --location \
+"https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" \
+| tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
+
+eksctl create cluster \
+--name production-cluster \
+--region ap-south-1 \
+--nodegroup-name workers \
+--node-type t3.medium \
+--nodes 2
+
+kubectl get nodes
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
+
+aws iam create-policy \
+--policy-name AWSLoadBalancerControllerIAMPolicy \
+--policy-document file://iam_policy.json
+
+eksctl utils associate-iam-oidc-provider \
+--region ap-south-1 \
+--cluster production-cluster \
+--approve
+
+eksctl create iamserviceaccount \
+  --cluster=production-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::813592692089:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve \
+  --region ap-south-1
+
+helm repo add eks https://aws.github.io/eks-charts
+
+helm repo update
+
+aws eks describe-cluster \
+--name production-cluster \
+--query "cluster.resourcesVpcConfig.vpcId" \
+--output text
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+-n kube-system \
+--set clusterName=production-cluster \
+--set serviceAccount.create=false \
+--set serviceAccount.name=aws-load-balancer-controller \
+--set region=ap-south-1 \
+--set vpcId=YOUR_VPC_ID
+
+kubectl apply -f \
+https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+kubectl autoscale deployment react-deployment \
+--cpu-percent=70 \
+--min=2 \
+--max=10 \
+-n production
+
+kubectl autoscale deployment php-deployment \
+--cpu-percent=70 \
+--min=2 \
+--max=10 \
+-n production
+
+helm repo add prometheus-community \
+https://prometheus-community.github.io/helm-charts
+
+helm repo update
+
+helm install monitoring prometheus-community/kube-prometheus-stack \
+-n monitoring \
+--create-namespace
+
+kubectl get secret monitoring-grafana \
+-n monitoring \
+-o jsonpath="{.data.admin-password}" | base64 --decode
+
+kubectl port-forward svc/monitoring-grafana \
+3000:80 -n monitoring
+
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+node -v
+npm -v
+
+npx create-react-app react-app
+cd react-app
+npm start
+
+npm install axios
+npm install react-router-dom
+npm install @mui/material @emotion/react @emotion/styled
+npm run build
+
+docker build -t akashbora02/react-app:v1 .
+
+docker login
+docker push akashbora02/react-app:v1
+
+cd php-app
+docker build -t akashbora02/php-app:v1 .
+docker push akashbora02/php-app:v1
