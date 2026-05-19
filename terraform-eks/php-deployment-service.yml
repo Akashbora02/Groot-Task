@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
       - name: php
-        image: php:8.2-apache
+        image: tomcat:9.0.118-jre25-temurin-noble
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
 ---
 apiVersion: v1
