@@ -1,4 +1,3 @@
-/*
 resource "helm_release" "cluster_autoscaler" {
   name       = "cluster-autoscaler"
   repository = "https://kubernetes.github.io/autoscaler"
@@ -20,4 +19,3 @@ resource "helm_release" "cluster_autoscaler" {
     value = "true"
   }
 }
-*/

@@ -1,4 +1,3 @@
-/*
 resource "helm_release" "prometheus" {
   name       = "monitoring"
   repository = "https://prometheus-community.github.io/helm-charts"
@@ -7,4 +6,3 @@ resource "helm_release" "prometheus" {
 
   create_namespace = true
 }
-*/
