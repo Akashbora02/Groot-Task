@@ -9,18 +9,16 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
-  - host: 
-    http:
+  - http:
       paths:
-      - path: /react
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: react-service
             port:
               number: 80
-  - host: 
-    http:
+  - http:
       paths:
       - path: /php
         pathType: Prefix
