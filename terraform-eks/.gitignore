@@ -1,0 +1,40 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform Variables
+terraform.tfvars
+*.auto.tfvars
+
+# Terraform Plan
+tfplan
+
+# Lock File (optional keep in git for teams)
+.terraform.lock.hcl
+
+# Kubernetes
+kubeconfig
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Helm
+helmfile.yaml
+
+# Secrets
+*.pem
+*.key
+*.crt
