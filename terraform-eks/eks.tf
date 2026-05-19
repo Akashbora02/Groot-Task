@@ -16,8 +16,8 @@ module "eks" {
       min_size     = 2
       max_size     = 5
 
-      instance_types = ["t3.medium"]
-
+      instance_types = ["t3.large"]
+      ami_type = "AL2_x86_64"
       tags = {
         "k8s.io/cluster-autoscaler/enabled"                     = "true"
         "k8s.io/cluster-autoscaler/production-eks"             = "owned"
