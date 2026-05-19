@@ -1,4 +1,4 @@
-resource "helm_release" "cluster_autoscaler" {
+#resource "helm_release" "cluster_autoscaler" {
   name       = "cluster-autoscaler"
   repository = "https://kubernetes.github.io/autoscaler"
   chart      = "cluster-autoscaler"
@@ -18,4 +18,4 @@ resource "helm_release" "cluster_autoscaler" {
     name  = "rbac.create"
     value = "true"
   }
-}
+#}
