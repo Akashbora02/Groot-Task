@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: php
-        image: php-8.2-apache
+        image: php:8.2.31-cli-alpine3.22
         ports:
         - containerPort: 80
 
