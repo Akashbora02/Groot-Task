@@ -1,4 +1,5 @@
-#resource "helm_release" "aws_load_balancer_controller" {
+/*
+resource "helm_release" "aws_load_balancer_controller" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
@@ -23,4 +24,5 @@
     name  = "vpcId"
     value = module.vpc.vpc_id
   }
-#}
+}
+*/
