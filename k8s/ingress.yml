@@ -12,7 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
 
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:123456789012:certificate/abcdefg-1234-5678-abcd-1234567890ab
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:079485644206:certificate/ada41d97-7988-415d-a8e9-1bb1bece3aec
     alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/success-codes: "200"
 spec:
